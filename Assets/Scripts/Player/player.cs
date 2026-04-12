@@ -25,7 +25,6 @@ public class player : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVector();
-        inputVector = inputVector.normalized;
         Debug.Log(inputVector);
         rb.MovePosition(rb.position + inputVector * (speed * Time.fixedDeltaTime));
 

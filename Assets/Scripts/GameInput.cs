@@ -9,7 +9,7 @@ public class GameInput : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this; // Записываем сам ккласс в Instance
+        Instance = this; // Записываем сам класс в Instance
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
