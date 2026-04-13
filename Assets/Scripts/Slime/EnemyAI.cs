@@ -7,9 +7,9 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private State startingState;
 
-    [SerializeField] private float RoamingDistanceMin = 3f;
-    [SerializeField] private float RoamingDistanceMax = 7f;
-    [SerializeField] private float RoamingTimerMax = 2f;
+    [SerializeField] private float RoamingDistanceMin = 4f;
+    [SerializeField] private float RoamingDistanceMax = 10f;
+    [SerializeField] private float RoamingTimerMax = 1f;
 
     private NavMeshAgent navMeshAgent;
     private State state;
@@ -21,11 +21,6 @@ public class EnemyAI : MonoBehaviour
     {
         Idle,
         Roaming
-    }
-
-    private void Start()
-    {
-        startingPos = transform.position;
     }
 
     private void Awake()
@@ -56,7 +51,9 @@ public class EnemyAI : MonoBehaviour
 
     private void Roaming()
     {
+        startingPos = transform.position;
         roamPos = GetRoamingPosition();
+        ChangeFacingDirection(startingPos, roamPos);
         navMeshAgent.SetDestination(roamPos);
     }
 
@@ -64,4 +61,16 @@ public class EnemyAI : MonoBehaviour
     {
         return startingPos + Utils.GetRandomDir() * UnityEngine.Random.Range(RoamingDistanceMin, RoamingDistanceMax);
     } 
+
+    private void ChangeFacingDirection(Vector3 sourcePos, Vector3 targetPos)
+    {
+        if (sourcePos.x > targetPos.x)
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
 }

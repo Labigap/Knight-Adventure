@@ -7,6 +7,7 @@ public class player : MonoBehaviour
   [SerializeField] private float speed = 7f;
 
     private Rigidbody2D rb;
+    Vector2 inputVector;
 
     private float minMovingSpeed = 0.1f;
     private bool IsRunning = false;
@@ -17,6 +18,11 @@ public class player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        inputVector = GameInput.Instance.GetMovementVector();
+    }
+
     private void FixedUpdate()
     {
         HandleMovement();
@@ -24,7 +30,6 @@ public class player : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 inputVector = GameInput.Instance.GetMovementVector();
         Debug.Log(inputVector);
         rb.MovePosition(rb.position + inputVector * (speed * Time.fixedDeltaTime));
 
