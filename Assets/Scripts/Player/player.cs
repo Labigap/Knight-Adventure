@@ -18,6 +18,16 @@ public class player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerAttack += GameInputOnPlayerAttack;
+    }
+
+    private void GameInputOnPlayerAttack(object sender, System.EventArgs e)
+    {
+        ActiveWeapon.Instance.GetActiveWeapon().Attack();
+    }
+
     private void Update()
     {
         inputVector = GameInput.Instance.GetMovementVector();
@@ -30,7 +40,6 @@ public class player : MonoBehaviour
 
     private void HandleMovement()
     {
-        Debug.Log(inputVector);
         rb.MovePosition(rb.position + inputVector * (speed * Time.fixedDeltaTime));
 
         if (Mathf.Abs(inputVector.x) > minMovingSpeed || Mathf.Abs(inputVector.y) > minMovingSpeed)

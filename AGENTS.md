@@ -2,7 +2,7 @@
 - Project name: Knight Adventure
 - Unity version: Unity 6000.0.65f1
 - Active game object:
-  - Name: Skeleton
+  - Name: Grass
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
